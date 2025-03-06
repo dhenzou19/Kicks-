@@ -1,2 +1,0 @@
-# Kicks-
-Footwear branded shoes
