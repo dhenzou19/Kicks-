@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billing System</title>
+    <style>
+       /* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+/* Header Section */
+.header {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #111315;
+    border-radius: 12px;
+    margin-bottom: 0px;
+    gap: 80px;
+}
+
+.brand-logo {
+    font-size: 24px;
+    font-weight: 600;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 15.5px;
+}
+
+.brand-logo i {
+    font-size: 22px;
+}
+
+/* Improved Search Bar */
+.search-bar {
+    position: relative;
+    width: 300px;
+    margin-left: 120px;
+
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 10px 14px 10px 40px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    background-color: #2d2d2d;
+    color: #ffffff;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search-bar input::placeholder {
+    color: #aaa;
+}
+
+.search-bar i {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    color: #aaa;
+    font-size: 16px;
+}
+
+.search-bar input:focus {
+    background-color: #3a3a3a;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+}
+
+
+
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: #111315;
+    color: #ffffff;
+    line-height: 1.5;
+}
+
+/* Container Layout */
+.container {
+    display: flex;
+    height: 100vh;
+    padding: 20px;
+    gap: 20px; /* ✅ Controls space between sidebar and products */
+}
+
+/* Categories Section */
+.categories {
+    flex: 0.5; /* ✅ Reduce width of the sidebar */
+    background: #111315;
+    padding: 15px;
+    border-radius: 12px;
+    overflow-y: auto;
+}
+
+
+.category-btn {
+    display: block;
+    width: 60%;
+    padding: 12px;
+    margin-bottom: 10px;
+    background: #1a1c1e;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: left;
+    color: #ffffff;
+    transition: background 0.2s ease;
+}
+
+.category-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Products Section */
+.products {
+    flex: 2;
+    background: #111315;
+    padding: 15px;
+    border-radius: 12px;
+    overflow-y: auto;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.product-card {
+    background: #1a1c1e;
+    border-radius: 12px;
+    padding: 15px;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.product-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.product-info {
+    margin-top: 12px;
+}
+
+.product-info h3 {
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: #ffffff;
+}
+
+.product-info p {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Bill Section */
+.bill {
+    flex: 1.5;
+    background: #2d2d2d;
+    padding: 20px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+}
+
+.bill h2 {
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.bill-items {
+    flex-grow: 1;
+    overflow-y: auto;
+    margin-bottom: 15px;
+}
+
+.bill-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px;
+    background: #1a1c1e;
+    margin-bottom: 10px;
+    border-radius: 8px;
+}
+
+.bill-item-controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.quantity-btn {
+    background: #2d2d2d;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #ffffff;
+    transition: background 0.2s ease;
+}
+
+.quantity-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.bill-summary {
+    background: #1a1c1e;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.bill-total {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+/* Checkout Button */
+.checkout-btn {
+    width: 100%;
+    padding: 14px;
+    background: #ffffff;
+    color: #000000;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background 0.2s ease;
+}
+
+.checkout-btn:hover {
+    background: #45a049;
+}
+
+/* Receipt Styles */
+.receipt {
+    width: 300px;
+    background: #ffffff;
+    padding: 20px;
+    font-family: 'Courier New', monospace;
+    color: #111315;
+}
+
+.receipt-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.receipt-items {
+    margin-bottom: 20px;
+}
+
+.receipt-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.receipt-total {
+    border-top: 1px dashed #000;
+    margin-top: 10px;
+    padding-top: 10px;
+    font-weight: bold;
+}
+
+/* Print Styling */
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    .receipt, .receipt * {
+        visibility: visible;
+    }
+    .receipt {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+}
+
+/* Footer */
+.footer {
+    position: fixed;
+    bottom: 10px;
+    left: 15px;
+    color: #ffffff;
+    font-size: 14px;
+    opacity: 0.7;
+    z-index: 1000;
+}
+
+    </style>
+</head>
+<body>
+    <!-- FontAwesome for icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+<div class="header">
+    <div class="brand-logo">
+        <i class="fas fa-shoe-prints"></i> <!-- Shoe icon -->
+        Kicks
+    </div>
+    <div class="search-bar">
+        <i class="fas fa-search"></i>
+        <input type="text" id="searchInput" placeholder="Search">
+    </div>
+</div>
+
+    <div class="container">
+        <div class="categories" id="categoriesSection">
+            <!-- Categories will be loaded here -->
+        </div>
+        
+        <div class="products">
+            <div class="products-grid" id="productsGrid">
+                <!-- Products will be loaded here -->
+            </div>
+        </div>
+        
+        <div class="bill">
+            <h2>Current Bill</h2>
+            <div class="bill-items" id="billItems">
+               
+            </div>
+            <div class="bill-summary">
+                <div class="bill-total">Total: $<span id="billTotal">0.00</span></div>
+                <button id="checkoutBtn" class="checkout-btn">Checkout</button>
+            </div>
+        </div>
+    </div>
+    <div class="footer">@2025 BigByte Cartel</div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="billing.js"></script>
+    
+ <!-- Billing js -->
+    <script>
+        // Add event listener for checkout button
+$('#checkoutBtn').on('click', function() {
+    if (Object.keys(billItems).length === 0) {
+        alert('Please add items to the bill first');
+        return;
+    }
+    printReceipt();
+});
+
+function printReceipt() {
+    // Generate receipt HTML
+    let receiptHTML = `
+        <div class="receipt">
+            <div class="receipt-header">
+                <h2>KICKS RECEIPT</h2>
+                <p>${new Date().toLocaleString()}</p>
+            </div>
+            <div class="receipt-items">
+    `;
+
+    // Add items to receipt
+    for (let id in billItems) {
+        const item = billItems[id];
+        const total = (item.price * item.quantity).toFixed(2);
+        receiptHTML += `
+            <div class="receipt-item">
+                <div>
+                    ${item.name} x${item.quantity}<br>
+                    <small>$${item.price.toFixed(2)} each</small>
+                </div>
+                <div>$${total}</div>
+            </div>
+        `;
+    }
+
+    // Add total to receipt
+    receiptHTML += `
+            </div>
+            <div class="receipt-total">
+                <div class="receipt-item">
+                    <div>Total:</div>
+                    <div>$${$('#billTotal').text()}</div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <p>Thank you for your purchase!</p>
+            </div>
+        </div>
+    `;
+
+    // Create temporary container for receipt
+    const receiptWindow = window.open('', '', 'width=350,height=600');
+    receiptWindow.document.write('<html><head><title>Receipt</title>');
+    
+    // Add styles to receipt window
+    const styles = document.getElementsByTagName('style')[0].innerHTML;
+    receiptWindow.document.write('<style>' + styles + '</style>');
+    receiptWindow.document.write('</head><body>');
+    receiptWindow.document.write(receiptHTML);
+    receiptWindow.document.write('</body></html>');
+    
+    // Print the receipt
+    setTimeout(() => {
+        receiptWindow.print();
+        receiptWindow.close();
+        
+        // Clear the bill after printing
+        billItems = {};
+        $('#billItems').empty();
+        updateTotal();
+    }, 250);
+}
+    </script>
+</body>
+</html>
